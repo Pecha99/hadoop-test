@@ -4,6 +4,7 @@
 2. ~~Установить Docker и Docker-Compose~~
 3. ~~Развернуть hadoop через Docker-Compose. На github есть готовые решения.~~
 4. ~~Развернуть контейнер с jenkins~~
+5. Уситановить ansible прям в контейнер с jenkins
 
 Основное задание:
 
