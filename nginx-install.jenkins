@@ -23,7 +23,7 @@ pipeline {
                     sh """ping -c 1 172.18.0.8"""
                 }
             }
-        }
+        
         stage("install nginx") {
             steps {
                 echo " ============== start building image =================="
@@ -31,4 +31,5 @@ pipeline {
                 sh 'ssh -i /var/jenkins_home/.ssh/id_rsa jenkins@172.17.0.3 && ansible-playbook install_nginx.yaml -vvvv'
             }
         }
+    }
 }
