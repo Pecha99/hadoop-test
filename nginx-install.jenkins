@@ -29,5 +29,12 @@ pipeline {
                 sh 'ssh -i /var/jenkins_home/.ssh/id_rsa jenkins@172.17.0.3 "ansible-playbook /etc/ansible/playbooks/install_nginx.yaml -vvvv"'
             }
         }
+        stage("test nginx") {
+          steps {
+              echo " ============== test nginx page =================="
+
+              sh 'curl http://130.162.55.151/ru-RU/index.html'
+          }  
+        }
     }
 }
