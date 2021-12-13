@@ -31,3 +31,4 @@ pipeline {
                 sh 'ssh -i /var/jenkins_home/.ssh/id_rsa jenkins@172.17.0.3 && ansible-playbook install_nginx.yaml -vvvv'
             }
         }
+}
