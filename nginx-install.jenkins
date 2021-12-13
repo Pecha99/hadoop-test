@@ -1,0 +1,33 @@
+#!groovy
+
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent { 
+        label 'master'
+        }
+    triggers { pollSCM('* * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("test hadoop") {
+            steps {
+                echo " ============== test hadoop =================="
+                    sh """ping -c 1 172.18.0.2"""
+                    sh """ping -c 1 172.18.0.3"""
+                    sh """ping -c 1 172.18.0.4"""
+                    sh """ping -c 1 172.18.0.5"""
+                    sh """ping -c 1 172.18.0.7"""
+                    sh """ping -c 1 172.18.0.8"""
+                }
+            }
+        }
+        stage("install nginx") {
+            steps {
+                echo " ============== start building image =================="
+                
+                sh 'ssh -i /var/jenkins_home/.ssh/id_rsa jenkins@172.17.0.3 && ansible-playbook install_nginx.yaml -vvvv'
+            }
+        }
